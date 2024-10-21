@@ -1,0 +1,69 @@
+
+Lab 1 Scenario:
+
+The Learningazurecloud compagny is moving to the cloud. You are on a team that will assist.
+Requirements:
+They are moving 16 windows server Datacenter VMs for their frontend deployment. You are moving the first one
+
+Task 1:
+Create the first VM
+
+Additionnal Info:
+1-1 - A new VNET will be required
+1-2 - High-availability is a huge concern. You need to make sure these servers spread accross at least 2 server cabinet with independent power and networking.
+1-3 - The CIO of Learningazurecloud company is terrified of azure plateform updates. He requests that at least 8 servers are up at all times.
+1-4 - The web server need to access the vms via RDP at public IP address. Web traffic must be allowed, port 80.
+
+Task 2:
+Learningazurecloud sales are down. The Learningazurecloud company is testing 3 linux servers and they want you to create their first server.
+
+Additionnal INFO:
+2-1 Connect to the VNET from Task 1.
+2-2 High-availability is an even BIGGER concern. The Zombie apocalypse has started and they are attacking datacenter across the world. You need to ensure 
+each VM lives in a separate dataceneter.
+2-3 storage cost are a HUGE concern. Use the cheapest options available for all storage.
+2-4 The Apps on this vm cannot use the OS drive for storage.
+2-5 The Zombie apocalypse has caused the CIO to become paraniod, he want all syslogs messages  archived
+
+Task 3:
+
+The Learningazurecloud company website can't handle it! As their consultant, you need to fix it.
+
+3-1 Create a virtual machine scale set
+3-2 They want to make sure their vms are spread out over multiple data centers.
+3-3 They want to start with 1 virtual machine but want to scale up to 3 if demand increases.
+3-4 Doesn't want the CPU usage to go above 70%.
+3-5 Make sure we are not wasting resources.
+3-6 Use existing VNET and make sure connections are load balanced.
+
+Solution:
+
+Task 1:
+
+- Create a virtual network 
+- create 1 availability set with 2 faults domain (because these servers spread across at least 2 servers cabinet with independent power and networking). 
+- add 3 updates domain ( because at least 8 servers are up at all times )
+Fault domains define the group of virtual machines that share a common power source and network switch. 
+Update domains indicate groups of virtual machines and underlying physical hardware that can be rebooted at the same time for any Maintenace activity 
+by Azure like driver update or underlying platform patch update.
+Placing servers into an availability set limit the impact of potential physical hardware failures, network outages, or power interruptions.
+- Create a Network security group and open 3389, and 80 ports. 
+
+Task 2:
+
+back to portal.azure.com
+
+- search for and select virtual machine, select create
+- create an availability zone to make sure each virtual machine lives in a separate data center
+- create a new data disk and use this disk for saving application data.
+- Enable OS guest diagnostics
+
+Task 3:
+
+back to portal.azure.com
+
+- search for and virtual machine scale set and select create
+- create an availability zone to spread out over multiple data centers.
+- configure autoscale option, set autoscale minimum and maximum of vm, scale out cpu threshold and number of vms to increase, scale in cpu threshold and 
+number of vms to decrease
+- create a load balancer and use a cloud init option to deploy a nginx web server to all linux vm using yaml file.
