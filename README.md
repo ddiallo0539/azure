@@ -1,12 +1,13 @@
 Blob storage from azure cloud shell
 
-Create a storage account.
-Create a container.
-Download a copy of the data file from: 
+copy-data-from-blob content tasks:
+- Create a storage account.
+- Create a container.
+- Download a copy of the data file from
 
 High-availability
 
-lab-file-1 content the instructions: Implemetation of availability zone, availability set and virtual machine scale set
+lab-file-1 content instructions: Implemetation of availability zone, availability set and virtual machine scale set
 - Task 1:
 - Create the first vm windows server Datacenter in an availability set
 
