@@ -1,0 +1,48 @@
+Tasks: Upload a copy of a data file as an Azure blob using an Azure cloud shell.
+  
+  Set an environment variable containing the storage account name
+
+  export AZURE_STORAGE_ACCOUNT="UNIQUENAME"
+  
+  Set an environment variable containing the resource group
+
+  export RESOURCE_GROUP="RESOURCEGROUPNAME>"
+
+  Create the storage account:
+
+  az storage account create \
+  --name $AZURE_STORAGE_ACCOUNT \
+  --resource-group $RESOURCE_GROUP \
+  --location westus \
+  --sku Standard_LRS \
+  --encryption-services blob
+
+ Get to the keys for our storage:
+  az storage account keys list \
+  --account-name $AZURE_STORAGE_ACCOUNT \
+  --resource-group $RESOURCE_GROUP \
+  --output table
+
+ Set an environment variable containing the storage account key:
+  export AZURE_STORAGE_KEY="KEY"
+
+Create a Container:
+ az storage container create --name containername
+
+Upload a file as a blob and verify the data is stored in the blob:
+
+ az storage blob upload \
+  --container-name containername \
+  --name cars \
+  --file satt-special-cars.csv
+
+  List the existing blobs and verify that our new blob appears in the list:
+   az storage blob list \
+    --container-name containername \
+    --output table
+
+ Download the blob data to a new file and check the file to verify that it contains the data from the blob:
+  az storage blob download \
+  --container-name containername \
+  --name cars \
+  --file cars-dl.csv
