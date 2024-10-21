@@ -1,3 +1,9 @@
+Blob storage from azure cloud shell
+
+Create a storage account.
+Create a container.
+Download a copy of the data file from: 
+
 High-availability
 
 lab-file-1 content the instructions: Implemetation of availability zone, availability set and virtual machine scale set
